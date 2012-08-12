@@ -5,21 +5,23 @@
     </tr>
   </thead>
   <tbody>
-    <% @timeline.each do |t| %>
+    <% @timeline.each do |time, liverecords| %>
+      <% liverecords.each_with_index do |l, i| %>
 	    <tr>
-	      <th><%= t[:time] %></th>
-	      <td><%= t[:tag] %></td>
-	      <td><%= t[:task] %></td>
-	      <td><%= t[:start] %></td>
-	      <td><%= t[:end] %></td>
-	      <td><%= t[:pass] %></td>
+	      <th><%= time if i.zero? %></th>
+	      <td><%= l.tags.first.try(:name) %></td>
+	      <td><%= l.task.try(:name) %></td>
+	      <td><%= l.start.try(:strftime, '%H:%M') %></td>
+	      <td><%= l.end.try(:strftime, '%H:%M') %></td>
+	      <td><%= l.pass %></td>
 	      <td>
-	        <% if t[:model] %>
-	          <%= link_to 'Edit', edit_liverecord_path(t[:model]) %>
-            <%= link_to 'Destroy', t[:model], confirm: 'Are you sure?', method: :delete %>
+	        <% unless l.new_record? %>
+	          <%= link_to 'Edit', edit_liverecord_path(l) %>
+            <%= link_to 'Destroy', l, confirm: 'Are you sure?', method: :delete %>
 	        <% end %>
 	      </td>
 	    </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

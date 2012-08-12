@@ -4,12 +4,12 @@ class LiverecordsController < ApplicationController
   def index
     @date = params[:date].nil? ? Date.today : Date.parse(params[:date])
 
-    @timeline = Liverecord.get_timeline @date
-    
+    @timeline = Liverecord.timeline @date
+
     @liverecords = Liverecord.all
 
     @ongoing_flag = Liverecord.where(:end => nil).exists?
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @liverecords }
