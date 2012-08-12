@@ -1,0 +1,78 @@
+<section class="dailyreport span7" >
+  <div id="timeline">
+    <%= flash[:notice] %>
+    <%= flash[:error] %>
+    <h2>DAYTIMELINE /<%= @date.to_s %></h2>
+    <%= link_to '<<'+(@date-1).to_s, {:controller  => 'liverecords', :action => 'index', :date => (@date-1).to_s } %>
+    <%= link_to (@date+1).to_s+'>>', {:controller  => 'liverecords', :action => 'index', :date => (@date+1).to_s } %>
+    <p>今日のノルマ：<?php echo $formedstats['norm']; ?></p>
+    <table>
+      <tr><th>Sleep</th><th>Value</th><th>Relax</th><th>Life</th><th>Unknown</th></tr>
+      <tr><td><?php echo $formedstats['slept']['time']; ?></td><td><?php echo $formedstats['value']['time']; ?></td><td><?php echo $formedstats['relax']['time']; ?></td><td><?php echo $formedstats['life']['time']; ?></td><td><?php echo $formedstats['unknown']['time']; ?></td></tr>
+      <tr><td><?php echo $formedstats['slept']['rate']; ?></td><td><?php echo $formedstats['value']['rate']; ?></td><td><?php echo $formedstats['relax']['rate']; ?></td><td><?php echo $formedstats['life']['rate']; ?></td><td><?php echo $formedstats['unknown']['rate']; ?></td></tr>
+      <tr><td class="<?php echo $formedstats['slept']['diffclass']; ?>"><?php echo $formedstats['slept']['diff']; ?></td><td class="<?php echo $formedstats['value']['diffclass']; ?>"><?php echo $formedstats['value']['diff']; ?></td><td class="<?php echo $formedstats['relax']['diffclass']; ?>"><?php echo $formedstats['relax']['diff']; ?></td><td class="<?php echo $formedstats['life']['diffclass']; ?>"><?php echo $formedstats['life']['diff']; ?></td><td class="<?php echo $formedstats['unknown']['diffclass']; ?>"><?php echo $formedstats['unknown']['diff']; ?></td></tr>
+    </table>
+    <%= render 'timeline' %>
+  </div>
+</section>
+
+<section class="task span5">
+  <div id="registertask">
+    <h2>Start your task</h2>
+    <%= render 'task_console' %>
+  </div>
+  <div id="displaytask" class="tabbable">
+<!--
+    <h2>TASK</h2>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#today" data-toggle="tab">todaystask</a></li>
+      <li><a href="#all" data-toggle="tab">priortask</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="today" class="tab-pane active">
+        <ul class="tasks-estimate">
+          <li>4:00</li>
+        </ul>
+        <ul class="tasks-passed">
+          <li>1:52</li>
+        </ul>
+      </div>
+      <div id="all" class="tab-pane">
+        <ul class="tasks-estimate">
+          <li>3:00</li>
+        </ul>
+        <ul class="tasks-passed">
+          <li>1:52</li>
+        </ul>
+      </div>
+    </div>
+-->
+  </div>
+</section>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Type</th>
+    <th>Task</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Deleted at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @liverecords.each do |liverecord| %>
+  <tr>
+    <td><%= liverecord.user_id %></td>
+    <td><%= liverecord.type_id %></td>
+    <td><%= liverecord.task_id %></td>
+    <td><%= liverecord.start %></td>
+    <td><%= liverecord.end %></td>
+    <td><%= liverecord.deleted_at %></td>
+    <td><%= link_to 'Show', liverecord %></td>
+    <td><%= link_to 'Edit', edit_liverecord_path(liverecord) %></td>
+    <td><%= link_to 'Destroy', liverecord, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>

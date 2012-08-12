@@ -1,0 +1,16 @@
+<% if @ongoing_flag %>
+  <%= form_tag({ :action => 'stop' }) do %>
+    <%= submit_tag 'Stop!' %>
+  <% end %>
+  
+<% else %>
+  <%= form_tag({ :action => 'create' }) do %>
+    <%= label :liverecord, :type_id, 'Type' %> 
+    <%= select :liverecord, :type_id, options_for_select({ 'Work' => 1, 'Learn' => 2, 'Rest' => 3, 'Play' => 4, 'Live' => 5, 'Sleep' => 6 }) %>
+    <%= label :task, :name, 'Task' %> 
+    <%= text_field :task, :name %>  
+    <%= label :tag, :name, 'Tag' %> 
+    <%= text_field :tag, :name %>  
+    <%= submit_tag 'Start!' %>
+  <% end %>
+<% end %>

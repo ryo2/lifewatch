@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @liverecord.user_id %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @liverecord.type_id %>
+</p>
+
+<p>
+  <b>Task:</b>
+  <%= @liverecord.task_id %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%= @liverecord.start %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%= @liverecord.end %>
+</p>
+
+<p>
+  <b>Deleted at:</b>
+  <%= @liverecord.deleted_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_liverecord_path(@liverecord) %> |
+<%= link_to 'Back', liverecords_path %>

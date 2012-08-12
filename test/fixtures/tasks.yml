@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  importance: 1
+  estimated_duration: 1
+  dead_line: 
+  deleted_at: 2012-08-09 14:12:13
+
+two:
+  name: MyString
+  importance: 1
+  estimated_duration: 1
+  dead_line: 
+  deleted_at: 2012-08-09 14:12:13

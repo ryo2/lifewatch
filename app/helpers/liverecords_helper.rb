@@ -1,0 +1,2 @@
+module LiverecordsHelper
+end

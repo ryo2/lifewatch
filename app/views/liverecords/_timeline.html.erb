@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th class="fr">Time</th><th>Tag</th><th>Task</th><th>Start</th><th>End</th><th>Pass</th><th>action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @timeline.each do |t| %>
+	    <tr>
+	      <th><%= t[:time] %></th>
+	      <td><%= t[:tag] %></td>
+	      <td><%= t[:task] %></td>
+	      <td><%= t[:start] %></td>
+	      <td><%= t[:end] %></td>
+	      <td><%= t[:pass] %></td>
+	      <td>
+	        <% if t[:model] %>
+	          <%= link_to 'Edit', edit_liverecord_path(t[:model]) %>
+            <%= link_to 'Destroy', t[:model], confirm: 'Are you sure?', method: :delete %>
+	        <% end %>
+	      </td>
+	    </tr>
+    <% end %>
+  </tbody>
+</table>
+
