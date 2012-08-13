@@ -1,16 +1,16 @@
-<% if @ongoing_flag %>
-  <%= form_tag({ :action => 'stop' }) do %>
-    <%= submit_tag 'Stop!' %>
+<% if @ongoing.exists? %>
+  <%= form_tag({:action => 'stop'}, {:method => 'put'}) do %>
+    <%= submit_tag 'Stop!', :tabindex => 1 %>
   <% end %>
   
 <% else %>
   <%= form_tag({ :action => 'create' }) do %>
     <%= label :liverecord, :type_id, 'Type' %> 
-    <%= select :liverecord, :type_id, options_for_select({ 'Work' => 1, 'Learn' => 2, 'Rest' => 3, 'Play' => 4, 'Live' => 5, 'Sleep' => 6 }) %>
+    <%= select :liverecord, :type_id, options_for_select({ 'Work' => 1, 'Learn' => 2, 'Rest' => 3, 'Play' => 4, 'Live' => 5, 'Sleep' => 6 }), {}, {:tabindex => 1} %>
     <%= label :task, :name, 'Task' %> 
-    <%= text_field :task, :name %>  
+    <%= text_field :task, :name, :tabindex => 2 %>  
     <%= label :tag, :name, 'Tag' %> 
-    <%= text_field :tag, :name %>  
-    <%= submit_tag 'Start!' %>
+    <%= text_field :tag, :name, :tabindex => 3 %>  
+    <%= submit_tag 'Start!', :tabindex => 4 %>
   <% end %>
 <% end %>

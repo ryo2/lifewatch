@@ -5,7 +5,7 @@ Lifewatch::Application.routes.draw do
 
   resources :liverecords do
     collection do
-      post 'stop'
+      put 'stop'
     end
   end
       

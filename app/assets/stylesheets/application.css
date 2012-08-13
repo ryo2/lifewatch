@@ -3491,37 +3491,8 @@ td	{
 
 /* #registertask */
 
-#registertask label{
-	width: 60px;
-	float: left;
-	margin-right: 10px;
-}
-
-#registertask input{
-	width: 50px;
-}
-
-#registertask label.estimate {
-	clear: left;
-}
-
-#registertask select {	
-	width: auto;
-	height: 20px;
-}
-
-#registertask select.minutes {	
-	margin-left: 54px;
-	margin-top: -28px;
-}
-
-#registertask div.buttons{
-		clear: left;
-}
-
 #registertask p.start{
-	float: left;
-	margin: 0 20px 0 10px;
+  display: block;
 }
 
 #registertask p.break{

@@ -8,9 +8,9 @@
     <p>今日のノルマ：<?php echo $formedstats['norm']; ?></p>
     <table>
       <tr><th>Sleep</th><th>Value</th><th>Relax</th><th>Life</th><th>Unknown</th></tr>
-      <tr><td><?php echo $formedstats['slept']['time']; ?></td><td><?php echo $formedstats['value']['time']; ?></td><td><?php echo $formedstats['relax']['time']; ?></td><td><?php echo $formedstats['life']['time']; ?></td><td><?php echo $formedstats['unknown']['time']; ?></td></tr>
-      <tr><td><?php echo $formedstats['slept']['rate']; ?></td><td><?php echo $formedstats['value']['rate']; ?></td><td><?php echo $formedstats['relax']['rate']; ?></td><td><?php echo $formedstats['life']['rate']; ?></td><td><?php echo $formedstats['unknown']['rate']; ?></td></tr>
-      <tr><td class="<?php echo $formedstats['slept']['diffclass']; ?>"><?php echo $formedstats['slept']['diff']; ?></td><td class="<?php echo $formedstats['value']['diffclass']; ?>"><?php echo $formedstats['value']['diff']; ?></td><td class="<?php echo $formedstats['relax']['diffclass']; ?>"><?php echo $formedstats['relax']['diff']; ?></td><td class="<?php echo $formedstats['life']['diffclass']; ?>"><?php echo $formedstats['life']['diff']; ?></td><td class="<?php echo $formedstats['unknown']['diffclass']; ?>"><?php echo $formedstats['unknown']['diff']; ?></td></tr>
+      <tr><td><%= @stats[:slept][:today] %></td><td><%= @stats[:value][:today] %></td><td><%= @stats[:relax][:today] %></td><td><%= @stats[:live][:today] %></td><td><%= @stats[:unknown][:today] %></td></tr>
+      <tr><td><%= @stats[:slept][:rate] %></td><td><%= @stats[:value][:rate] %></td><td><%= @stats[:relax][:rate] %></td><td><%= @stats[:live][:rate] %></td><td><%= @stats[:unknown][:rate] %></td></tr>
+      <tr><td class="<%= @stats[:slept][:diffclass] %>"><%= @stats[:slept][:diff] %></td><td class="<%= @stats[:value][:diffclass] %>"><%= @stats[:value][:diff] %></td><td class="<%= @stats[:relax][:diffclass] %>"><%= @stats[:relax][:diff] %></td><td class="<%= @stats[:live][:diffclass] %>"><%= @stats[:live][:diff] %></td><td class="<%= @stats[:unknown][:diffclass] %>"><%= @stats[:unknown][:diff] %></td></tr>
     </table>
     <%= render 'timeline' %>
   </div>
@@ -19,8 +19,7 @@
 <section class="task span5">
   <div id="registertask">
     <h2>Start your task</h2>
-    <%= render 'task_console' %>
-  </div>
+    <%= render 'task_console' %>	  </div>
   <div id="displaytask" class="tabbable">
 <!--
     <h2>TASK</h2>

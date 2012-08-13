@@ -2,13 +2,13 @@ class LiverecordsController < ApplicationController
   # GET /liverecords
   # GET /liverecords.json
   def index
+
+    @user = User.find(1)
     @date = params[:date].nil? ? Date.today : Date.parse(params[:date])
-
-    @timeline = Liverecord.get_timeline @date
-    
+    @timeline = @user.liverecords.get_timeline @date
+    @stats = Liverecord.get_stats @date
+    @ongoing = @user.liverecords.where(:end => nil)
     @liverecords = Liverecord.all
-
-    @ongoing_flag = Liverecord.where(:end => nil).exists?
     
     respond_to do |format|
       format.html # index.html.erb
@@ -18,18 +18,15 @@ class LiverecordsController < ApplicationController
 
   def create
     @user = User.find(1)
+    @task = @user.tasks.find_or_create_by_name(params[:task][:name])
 
-    @task = Task.find_or_create_by_name(params[:task][:name])
-    record = {
-      user_id: @user.id,
+    @liverecord = @user.liverecords.build({
       task_id: @task.id,
       type_id: params[:liverecord][:type_id],
       start: Time.now
-    }
+    })
 
-    @liverecord = Liverecord.new(record)
-
-    if @liverecord.save
+    if @liverecord.save 
       @user.tag(@liverecord, :with => params[:tag][:name], :on => :tags)
       redirect_to :root, :flash => {:notice => "Your new task started!"}
     else
@@ -49,9 +46,10 @@ class LiverecordsController < ApplicationController
   end
 
   def stop
-    @rec = Liverecord.where({:user_id => 1, :end => nil}).first
-    @rec.end = Time.now
-    if @rec.save
+    @user = User.find(1)
+    @rec = @user.liverecords.where({:end => nil}).first
+
+    if @rec.update_attributes({ :end => Time.now })
       redirect_to :root, :flash => {:notice => "Stop the task!"}
     else
       redirect_to :root, :flash => {:error => "Something failed."}
