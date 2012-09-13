@@ -1,4 +1,4 @@
-<% if @ongoing.exists? %>
+<% if @ongoing_flag.exists? %>
   <%= form_tag({:action => 'stop'}, {:method => 'put'}) do %>
     <%= submit_tag 'Stop!', :tabindex => 1 %>
   <% end %>

@@ -5,11 +5,14 @@ class LiverecordsController < ApplicationController
 
     @user = User.find(1)
     @date = params[:date].nil? ? Date.today : Date.parse(params[:date])
-    @timeline = @user.liverecords.get_timeline @date
     @stats = Liverecord.get_stats @date
-    @ongoing = @user.liverecords.where(:end => nil)
-    @liverecords = Liverecord.all
     
+    @timeline = Liverecord.timeline @date
+
+    @liverecords = @user.liverecords.all
+
+    @ongoing_flag = @user.liverecords.where(:end => nil)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @liverecords }
